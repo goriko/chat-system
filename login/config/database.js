@@ -4,6 +4,6 @@ module.exports = {
         'host': 'localhost',
         'user': 'root'
     },
-	'database': 'my_schema',
+	'database': 'chatee',
     'users_table': 'users'
 };
