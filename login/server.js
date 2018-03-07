@@ -54,7 +54,7 @@ require('./app/routes.js')(app, passport); // load our routes and pass in our ap
 
 
 
-server.listen(3000,"192.168.43.147");
+server.listen(process.env.PORT || 3000,'192.168.1.15');
 console.log('Server running....');
 
 /*app.get('/', function(req, res){
