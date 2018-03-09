@@ -10,13 +10,7 @@ $(function(){
 	var send_username = $("#send_username")
 	var chatroom = $("#chatroom")
 	var feedback = $("#feedback")
-	var tryer = $('#trying');
-
-
-tryer.click(function(){
-	alert("try");
-})
-	//Emit message
+  //Emit message
 	send_message.click(function(){
 		socket.emit('new_message', {message : message.val()})
 	})

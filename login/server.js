@@ -18,9 +18,9 @@ var io = require('socket.io').listen(server);
 require('./config/passport')(passport); // pass passport for configuration
 
 
-require('./public/js/chat.js')
+
 // set up our express application
-app.use(express.static('public'))//for css
+app.use(express.static(__dirname + '/public'));//for css
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.urlencoded({
