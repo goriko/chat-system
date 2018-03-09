@@ -26,6 +26,7 @@ app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.urlencoded({
 	extended: true
 }));
+app.use(express.static('img'));
 app.use(bodyParser.json());
 app.set('view engine', 'ejs'); // set up ejs for templating
 
@@ -45,7 +46,7 @@ require('./app/routes.js')(app, passport); // load our routes and pass in our ap
 
 // launch ======================================================================
 
-server.listen(3000,'192.168.1.15')
+server.listen(3000,'192.168.110.1')
 io.on('connection',(socket) =>{
 	console.log("New user connected")
 
