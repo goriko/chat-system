@@ -7,33 +7,26 @@ var session  = require('express-session');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
-var app      = express();
-//var port     = process.env.PORT || 8080;
-
+var app   = express();
 var passport = require('passport');
 var flash    = require('connect-flash');
-var express = require('express');
-var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
-users = [];
-connections = [];
 // configuration ===============================================================
 // connect to our database
 
 require('./config/passport')(passport); // pass passport for configuration
 
 
-
+require('./public/js/chat.js')
 // set up our express application
-app.use(express.static(__dirname + '/public'));//for css
+app.use(express.static('public'))//for css
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.urlencoded({
 	extended: true
 }));
 app.use(bodyParser.json());
-app.use(express.static('public'));
 app.set('view engine', 'ejs'); // set up ejs for templating
 
 // required for passport
@@ -52,41 +45,21 @@ require('./app/routes.js')(app, passport); // load our routes and pass in our ap
 
 // launch ======================================================================
 
+server.listen(3000,'192.168.1.15')
+io.on('connection',(socket) =>{
+	console.log("New user connected")
 
+	socket.on('loginform',(data) =>{
+		socket.username = data.username;
+	})
 
-server.listen(process.env.PORT || 3000,'192.168.1.15');
-console.log('Server running....');
+	socket.on('new_message', (data) => {
+        //broadcast the new message
+        io.sockets.emit('new_message', {message : data.message, username : socket.username});
+    })
 
-/*app.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html');
-});*/
-
-io.sockets.on('connection', function(socket){
-  connections.push(socket);
-  console.log('Connected: %s sockets connected', connections.length);
-
-  // Disconnect
-  socket.on('disconnect', function(data){
-    users.splice(users.indexOf(socket.username), 1);
-    updateUsernames();
-    connections.splice(connections.indexOf(socket), 1);
-    console.log('Disconnected: %s sockets connected', connections.length);
-  });
-
-  // Send message
-  socket.on('send message', function(data){
-    io.sockets.emit('new message', {msg: data, user:socket.username});
-  });
-
-  // New user
-  socket.on('new user', function(data, callback){
-    callback(true);
-    socket.username = data;
-    users.push(socket.username);
-    updateUsernames();
-  });
-
-  function updateUsernames(){
-    io.sockets.emit('get users', users);
-  }
-});
+    //listen on typing
+    socket.on('typing', (data) => {
+    	socket.broadcast.emit('typing', {username : socket.username})
+    })
+})
