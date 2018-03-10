@@ -48,12 +48,6 @@
     		message.val('');
     		chatroom.append("<p class='message'>" + data.username + ": " + data.message + "</p>")
     	})
-
-    	//Emit a username
-    	send_username.click(function(){
-
-    	})
-
     	//Emit typing
     	message.bind("keypress", () => {
     		socket.emit('typing')
