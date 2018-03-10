@@ -16,7 +16,7 @@ module.exports = function(app, passport) {
 
 	// process the login form
 	app.post('/login', passport.authenticate('local-login', {
-            successRedirect : '/profile', // redirect to the secure profile section
+            successRedirect : '/main', // redirect to the secure profile section
             failureRedirect : '/login', // redirect back to the signup page if there is an error
             failureFlash : true // allow flash messages
 		}),
@@ -28,6 +28,7 @@ module.exports = function(app, passport) {
             } else {
               req.session.cookie.expires = false;
             }
+						alert(passpot.username);
         res.redirect('/');
     });
 
@@ -52,7 +53,7 @@ module.exports = function(app, passport) {
 	// =====================================
 	// we will want this protected so you have to be logged in to visit
 	// we will use route middleware to verify this (the isLoggedIn function)
-	app.get('/profile', isLoggedIn, function(req, res) {
+	app.get('/main', isLoggedIn, function(req, res) {
 		res.render('chatee.ejs', {
 			user : req.user // get the user out of session and pass to template
 		});

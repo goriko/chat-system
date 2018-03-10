@@ -16,11 +16,8 @@ var io = require('socket.io').listen(server);
 // connect to our database
 
 require('./config/passport')(passport); // pass passport for configuration
-
-
-
 // set up our express application
-app.use(express.static(__dirname + '/public'));//for css
+app.use(express.static('public'))//for css
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.urlencoded({
@@ -40,6 +37,7 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 
+
 // routes ======================================================================
 require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
@@ -49,8 +47,8 @@ server.listen(3000,'192.168.1.15')
 io.on('connection',(socket) =>{
 	console.log("New user connected")
 
-	socket.on('loginform',(data) =>{
-		socket.username = data.username;
+	socket.on('change_username', (data) => {
+			socket.username = data.username
 	})
 
 	socket.on('new_message', (data) => {

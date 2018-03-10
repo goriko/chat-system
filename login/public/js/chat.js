@@ -1,18 +1,29 @@
+require("jsdom").env("", function(err, window) {
+    if (err) {
+        console.error(err);
+        return;
+    }
 
+    var $ = require("jquery")(window);
+});
 $(function(){
    	//make connection
 	var socket = io.connect('192.168.1.15:3000')
 
 	//buttons and inputs
 	var message = $("#message")
-	var username = $("#username")
+	var username = $("#user")
 	var send_message = $("#send_message")
 	var send_username = $("#send_username")
 	var chatroom = $("#chatroom")
 	var feedback = $("#feedback")
+	var ye = $("#yee")
   //Emit message
+
+
 	send_message.click(function(){
 		socket.emit('new_message', {message : message.val()})
+    alert("ye")
 	})
 
 	//Listen on new_message
