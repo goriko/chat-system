@@ -4,13 +4,14 @@
     <meta http-equiv="Content-Type" const="text/html;charset=UTF-8" />
     <link href="http://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="css/style.css" >
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
     <title>Simple Chat App</title>
   </head>
 
   <body>
     <header>
-      <h1>Super Chat</h1>
+      <h1>Super Chat</h1><a class="btn btn-primary" href="/logout" class="btn btn-default btn-sm">Logout</a>
     </header>
     <section id="chatroom">
       <section id="feedback"></section>
@@ -23,41 +24,5 @@
     </section>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="js/chat.js"></script>
-    <script>
-    $(function(){
-       	//make connection
-    	var socket = io.connect('192.168.1.15:3000')
-
-    	//buttons and inputs
-    	var message = $("#message")
-    	var username = $("#user")
-    	var send_message = $("#send_message")
-    	var send_username = $("#send_username")
-    	var chatroom = $("#chatroom")
-    	var feedback = $("#feedback")
-    	var ye = $("#yee")
-      //Emit message
-    	send_message.click(function(){
-        socket.emit('change_username', {username : username.val()})
-    		socket.emit('new_message', {message : message.val()})
-    	})
-
-    	//Listen on new_message
-    	socket.on("new_message", (data) => {
-    		feedback.html('');
-    		message.val('');
-    		chatroom.append("<p class='message'>" + data.username + ": " + data.message + "</p>")
-    	})
-    	//Emit typing
-    	message.bind("keypress", () => {
-    		socket.emit('typing')
-    	})
-
-    	//Listen on typing
-    	socket.on('typing', (data) => {
-    		feedback.html("<p><i>" + data.username + " is typing a message..." + "</i></p>")
-    	})
-    });
-    </script>
   </body>
 </html>
