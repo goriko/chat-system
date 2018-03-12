@@ -1,27 +1,66 @@
-<!DOCTYPE html>
-<html>
+<html lang='en'>
   <head>
+    <title></title>
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="vendor/simple-line-icons/css/simple-line-icons.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+    <link href="css/newdesign.css" rel="stylesheet">
     <meta http-equiv="Content-Type" const="text/html;charset=UTF-8" />
     <link href="http://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="css/style.css" >
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
-    <title>Simple Chat App</title>
+    <style>
+      .colo1{
+        background-color: #47476b;
+      }
+      .colo2{
+        background-color: #666699;
+      }
+      .colo3{
+        background-color: #f2f2f2;
+      }
+      .full{
+        height: 100%;
+      }
+
+    </style>
   </head>
-
   <body>
-    <header>
-      <h1>Super Chat</h1><a class="btn btn-primary" href="/logout" class="btn btn-default btn-sm">Logout</a>
-    </header>
-    <section id="chatroom">
-      <section id="feedback"></section>
-    </section>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-1 full colo1">
 
-    <section id="input_zone">
-      <input id="user" type="hidden" value="<%= user.username %>"/>
-      <input id="message" class="vertical-align" type="text" />
-      <button id="send_message" class="vertical-align" type="button">Send</button>
-    </section>
+        </div>
+        <div class="col-3 colo2">
+
+        </div>
+
+        <div class="col-5 colo3">
+          <nav class="navbar fixed-top navbar-light bg-faded" style='background-color:#e6e6e6;'>
+            <a class='navbar-brand'>Daryl Christian Rabanos</a>
+            <a class="navbar-item" href="#"><span class='fa fa-gear fa-2x'></span></a>
+          </nav>
+          <section id="chatroom">
+            <section id="feedback"></section>
+          </section>
+
+          <section id="input_zone">
+            <input id="user" type="hidden" value="<%= user.username %>"/>
+            <input id="message" class="vertical-align" type="text" />
+            <button id="send_message" class="vertical-align btn btn-success" type="button">Send</button>
+          </section>
+        </div>
+
+        <div class="col-3 colo2">
+
+        </div>
+
+      </div>
+    </div>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="js/chat.js"></script>
   </body>

@@ -44,8 +44,8 @@ require('./app/routes.js')(app, passport); // load our routes and pass in our ap
 
 // launch ======================================================================
 
-server.listen(3000,'192.168.1.15')
-console.log("server running...192.162.1.15")
+server.listen(3000,'192.168.56.1')
+
 io.on('connection',(socket) =>{
 	console.log("New user connected")
 
