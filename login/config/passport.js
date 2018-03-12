@@ -66,7 +66,7 @@ module.exports = function(passport) {
                     connection.query(insertQuery,[newUserMysql.username, newUserMysql.password],function(err, rows) {
                         newUserMysql.id = rows.insertId;
 
-                        return done(null, newUserMysql);
+                        return done(null, newUserMysql,req.flash('loginMessage', 'succes'));
                     });
                 }
             });
@@ -96,8 +96,8 @@ module.exports = function(passport) {
                 }
 
                 // if the user is found but the password is wrong
-                if (!password===rows[0].password){
-                    return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata  
+                if (password!=rows[0].password){
+                    return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
                 }
 
                 // all is well, return successful user
