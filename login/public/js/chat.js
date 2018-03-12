@@ -1,6 +1,6 @@
 $(function(){
    	//make connection
-	var socket = io.connect('192.168.43.89:3000')
+	var socket = io.connect('192.168.2.104:3000')
 
 	//buttons and inputs
 	var message = $("#message")
@@ -39,3 +39,19 @@ socket.emit('change_username', {username : username.val()})
 		feedback.html("<p><i>" + data.username + " is typing a message..." + "</i></p>")
 	})
 });
+
+var modal = document.getElementById('modal');
+var modalBtn = document.getElementById('modalBtn');
+var closeBtn = document.getElementsByClassName('closeBtn')[0];
+
+modalBtn.addEventListener('click', openModal);
+closeBtn.addEventListener('click', closeModal);
+
+
+function openModal(){
+	modal.style.display = 'inline-block';
+}
+
+function closeModal(){
+	modal.style.display = 'none';
+}
