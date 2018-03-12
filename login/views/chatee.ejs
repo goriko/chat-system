@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
     <link href="css/newdesign.css" rel="stylesheet">
+    <link href="css/new-age.min.css" rel="stylesheet">
     <meta http-equiv="Content-Type" const="text/html;charset=UTF-8" />
     <link href="http://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="css/style.css" >
@@ -23,8 +24,33 @@
       .colo3{
         background-color: #f2f2f2;
       }
+      .over{
+    overflow: scroll;
+    width: 100%;
+   height: 80%;
+      }
+      .send{
+        position: absolute;
+          bottom: 0px;
+
+          right: 0px;
+          width: 10%;
+          height: 50px;
+          z-index: 99;
+          background: #fafafa;
+          border: none;
+          outline: none;
+          padding-left: 55px;
+          padding-right: 55px;
+          color: #666;
+          font-weight: 400;
+      }
       .full{
         height: 100%;
+      }
+      #chatroom, #feedback{
+        padding: 0px;
+        margin-top: 0px;
       }
 
     </style>
@@ -35,28 +61,57 @@
         <div class="col-1 full colo1">
 
         </div>
-        <div class="col-3 colo2">
+        <div class="col-3 full colo2">
 
         </div>
 
-        <div class="col-5 colo3">
-          <nav class="navbar fixed-top navbar-light bg-faded" style='background-color:#e6e6e6;'>
+        <div class="col-5 full colo3">
+          <nav class="navbar navbar-light bg-faded" style='background-color:#e6e6e6;'>
             <a class='navbar-brand'>Daryl Christian Rabanos</a>
             <a class="navbar-item" href="#"><span class='fa fa-gear fa-2x'></span></a>
           </nav>
-          <section id="chatroom">
-            <section id="feedback"></section>
-          </section>
+          <div class="over">
+            <section id="chatroom">
+              <section id="feedback"></section>
+            </section>
+          </div>
 
-          <section id="input_zone">
             <input id="user" type="hidden" value="<%= user.username %>"/>
-            <input id="message" class="vertical-align" type="text" />
-            <button id="send_message" class="vertical-align btn btn-success" type="button">Send</button>
-          </section>
+            <input id="message" type="text" class="form-control textarea" placeholder="Type Message Here">
+            <button id="send_message" class="btn btn-default send" type="submit">Send</button>
+
         </div>
 
-        <div class="col-3 colo2">
+        <div class="col-3 full colo2">
+          <button class='btn btn-secondary' id="modalBtn">Update Profile</button>
+          <div class="simpleModal" id="modal">
+            <div class="modal-content">
+              <span class="closeBtn">&times;</span>
+              <h1>User Information</h1>
+              <form action="/update" method="post">
+                <div class="form-group">
+                 <label>Name</label>
+            		   <input type="text" class="form-control" name="name">
+            			<label>Date of Birth</label>
+            			<input type="date" class="form-control" name="dob">
+            			<label>Address</label>
+            			<input type="text" class="form-control" name="address">
+                  <label>Gender</label>
+            			<select name="gender" class="form-control">
+            				<option value="" disabled="disabled" selected="selected">Choose Gender</option>
+            				<option value='M'>Male</option>
+            				<option value='F'>Female</option>
+            			</select>
+            			<label>Interests</label>
+            			<input type="text" class="form-control" name="interest">
+            			<label>Picture</label>
+            			<input type="file" name="doc">
+            		<button type="submit" class="btn btn-warning btn-lg">Update Info</button>
+              </div>
+              </form>
 
+            </div>
+          </div>
         </div>
 
       </div>
