@@ -1,6 +1,6 @@
 $(function(){
    	//make connection
-	var socket = io.connect('192.168.43.89:3000')
+	var socket = io.connect('192.168.1.15:3000')
 
 	//buttons and inputs
 	var message = $("#message")
