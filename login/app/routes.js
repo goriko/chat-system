@@ -10,8 +10,10 @@ module.exports = function(app, passport) {
 	// show the login form
 	app.get('/login', function(req, res) {
 
+		var query = connection.query('SELECT username FROM users join friends on users.id = friends.firstId where id = 1',function(err,friends){
 		// render the page and pass in any flash data if it exists
-		res.render('login.ejs', { message: req.flash('loginMessage') });
+		res.render('login.ejs', { message: req.flash('loginMessage'),"friends":friends});
+	});
 	});
 
 	// process the login form
@@ -20,17 +22,7 @@ module.exports = function(app, passport) {
             failureRedirect : '/login', // redirect back to the signup page if there is an error
             failureFlash : true // allow flash messages
 		}),
-        function(req, res) {
-            console.log("hello");
-
-            if (req.body.remember) {
-              req.session.cookie.maxAge = 1000 * 60 * 3;
-            } else {
-              req.session.cookie.expires = false;
-            }
-						alert(passpot.username);
-        res.redirect('/');
-    });
+	);
 
 	// =====================================
 	// SIGNUP ==============================
