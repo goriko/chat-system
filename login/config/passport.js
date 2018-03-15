@@ -5,7 +5,6 @@ var LocalStrategy   = require('passport-local').Strategy;
 
 // load up the user model
 var mysql = require('mysql');
-var bcrypt = require('bcrypt-nodejs');
 var dbconfig = require('./database');
 var connection = mysql.createConnection(dbconfig.connection);
 
@@ -66,7 +65,7 @@ module.exports = function(passport) {
                     connection.query(insertQuery,[newUserMysql.username, newUserMysql.password],function(err, rows) {
                         newUserMysql.id = rows.insertId;
 
-                        return done(null, newUserMysql,req.flash('loginMessage', 'succes'));
+                        return done(null, newUserMysql,req.flash('loginMessage', 'success'));
                     });
                 }
             });

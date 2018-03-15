@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <body>
+      <table class="table table-inverse">
+      <thead>
+        <tr>
+          <th>Name</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% for(var i=0; i < friends.length; i++) { %>
+       <tr>
+         <td><%= friends[i].username %></td>
+         <td><button>chat</button>
+       </tr>
+    <% } %>
+      </tbody>
+
+    </table>
+    </body>
+  </head>
+</html>
