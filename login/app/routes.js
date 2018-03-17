@@ -1,6 +1,6 @@
 // app/routes.js
 var mysql = require('mysql');
-var dbconfig = require('./database');
+var dbconfig = require('../config/database');
 var connection = mysql.createConnection(dbconfig.connection);
 var bodyParser = require('body-parser');
 connection.query('USE ' + dbconfig.database);
@@ -54,16 +54,18 @@ module.exports = function(app, passport) {
 	// we will use route middleware to verify this (the isLoggedIn function)
 	app.get('/main', isLoggedIn, function(req, res) {
 		res.render('chatee.ejs', {
-			user : req.user // get the user out of session and pass to template
+			user : req.user, // get the user out of session and pass to template
+			message:req.flash('errorMessage') //to show message if adding friends has problems
 		});
 	});
 	// =====================================
 	// Friends SECTION =========================
 	// =====================================
 app.post('/friends',isLoggedIn,function(req,res){
+	//gets friends of user
 connection.query("SELECT * FROM `friends` join users on users.id = friends.secondId WHERE firstId =  ?",[req.body.id],function(err,results){
 		if(err){
-			console.log("asds");
+
 		}else{
 		console.log(req.body.id);
 		res.render('friends.ejs',{friends: results});
@@ -72,16 +74,27 @@ connection.query("SELECT * FROM `friends` join users on users.id = friends.secon
 });
 
 app.post('/add',isLoggedIn,function(req,res){
+	//check if friend exists
 	connection.query("Select id from users where username = ?",[req.body.friend],function(err,fresult){
-			console.log(fresult[0]);
+		if(fresult='0'){
+			connection.query("SELECT * FROM users WHERE id = ?",[req.id], function(err, results){
+			req.flash('errorMessage', 'No such user');
+			res.render('chatee.ejs',{
+				user:results,
+				message:req.flash('errorMessage')
+			});
+		});
+		}else{
+			//insert friend into db if found
 			connection.query("INSERT INTO friends(firstId,secondId) values (?,?)",[req.body.id,fresult[0].id],function(err,sresult){
+			// get friends of the user
 			connection.query("SELECT * FROM `friends` join users on users.id = friends.secondId WHERE firstId =  ?",[req.body.id],function(err,results){
 			res.render('friends.ejs',{friends:results});
-		});
-		});
+				});
+			});
+		}
 	});
 });
-
 app.post('/update',function(req, res){
 	connection.query("UPDATE users SET name = ?, interests = ?, address = ?, gender = ? WHERE id = ?", [req.body.name, req.body.interest, req.body.address, req.body.gender, req.body.id], function(err, fresult){
 		console.log(fresult);

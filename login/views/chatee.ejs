@@ -66,6 +66,9 @@
         <div class="col-3 full colo2">
           <form method="POST" action="/add">
             <input type="hidden" name="id" value="<%= user.id %>">
+              <% if (message.length > 0) { %>
+                    <div class="alert alert-danger"><%= message %></div>
+                  <% } %>
             <input type="text" name="friend">
             <input type="submit" value="Add friend">
           </form>

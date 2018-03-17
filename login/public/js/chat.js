@@ -1,6 +1,6 @@
 $(function(){
    	//make connection
-	var socket = io.connect('192.168.1.15:3000')
+	var socket = io.connect('localhost:3000')
 
 	//buttons and inputs
 	var message = $("#message")
@@ -43,7 +43,6 @@ socket.emit('change_username', {username : username.val()})
 var modal = document.getElementById('modal');
 var modalBtn = document.getElementById('modalBtn');
 var closeBtn = document.getElementsByClassName('closeBtn')[0];
-
 modalBtn.addEventListener('click', openModal);
 closeBtn.addEventListener('click', closeModal);
 

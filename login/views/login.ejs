@@ -3,7 +3,7 @@
 <html>
 <head>
 	<title>Chatee</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1" /> 
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
@@ -57,9 +57,12 @@
 
             <!-- show any messages that come back with authentication -->
             <% if (message.length > 0) { %>
+							<% if (message != 'success') { %>
                 <div class="alert alert-danger"><%= message %></div>
-            <% } %>
-
+            <% } else {%>
+							<div class="alert alert-success"><%= message %></div>
+							<%}%>
+							<%}%>
             <!-- LOGIN FORM -->
             <form action="/login" method="post" class="loginform">
                 <div class="form-group">
