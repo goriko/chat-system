@@ -72,10 +72,23 @@
             <input type="text" name="friend">
             <input type="submit" value="Add friend">
           </form>
-          <form method="POST" action="/friends">
-              <input type="hidden" name="id" value="<%= user.id %>">
-              <input type="submit" value="friend"/>
-          </form>
+            <table class="table table-inverse">
+            <thead>
+              <tr>
+                <th></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% for(var i=0; i < friends.length; i++) { %>
+             <tr>
+               <td><%= friends[i].username %></td>
+               <td><button>chat</button>
+             </tr>
+          <% } %>
+            </tbody>
+
+          </table>
         </div>
 
         <div class="col-5 full colo3">
