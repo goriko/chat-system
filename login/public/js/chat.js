@@ -11,9 +11,11 @@ $(function(){
 	var feedback = $("#feedback")
 	var ye = $("#yee")
   //Emit message
-socket.emit('change_username', {username : username.val()})
+
 
 	send_message.click(function(){
+		console.log(username.val())
+		socket.emit('change_username', {username : username.val()})
 		socket.emit('new_message', {message : message.val()})
 	})
 

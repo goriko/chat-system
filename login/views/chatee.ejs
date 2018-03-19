@@ -1,6 +1,6 @@
 <html lang='en'>
   <head>
-    <title></title>
+    <title>Chatee</title>
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="vendor/simple-line-icons/css/simple-line-icons.css">
@@ -52,6 +52,65 @@
         padding: 0px;
         margin-top: 0px;
       }
+      .messages{
+    margin-left: 10%;
+  font-weight: bold;
+  font-size: 30;
+}
+.search{
+    width: 130px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('searchicon.png');
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    transition: width 0.4s ease-in-out;
+}
+.search:focus{
+  width: 100%;
+}
+.message {
+float: left;
+width: 100%;
+top: 10px;
+margin: 10px 0;
+border-bottom: 1px solid #ccc;
+}
+.message p {
+font-size: 0.8em;
+width: 90%;
+margin: 5px 0;
+}
+.lastchat {
+    display: block;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+.lastchat:hover {
+      background-color: #555;
+  }
+  ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+h2 {
+  font-size: 1em;
+  font-weight: 400;
+}
+h2:after {
+  content: '';
+  display: inline-block;
+  height: 10px;
+  width: 10px;
+  background: #39caad;
+  border-radius: 100%;
+  margin-left: 5px;
+}
 
     </style>
   </head>
@@ -64,27 +123,24 @@
           </form>
         </div>
         <div class="col-3 full colo2">
+          <br>
+          <span class="messages">MESSAGES</span>
+          <br>
+          <br>
           <form method="POST" action="/add">
             <input type="hidden" name="id" value="<%= user.id %>">
               <% if (message.length > 0) { %>
                     <div class="alert alert-danger"><%= message %></div>
                   <% } %>
-            <input type="text" name="friend">
-            <input type="submit" value="Add friend">
+            <input type="text" class='search' placeholder="Add friends" name="friend">
           </form>
-            <table class="table table-inverse">
-            <thead>
-              <tr>
-                <th></th>
-              </tr>
-            </thead>
-
-            <tbody>
               <% for(var i=0; i < friends.length; i++) { %>
-             <tr>
-               <td><%= friends[i].username %></td>
-               <td><button>chat</button>
-             </tr>
+                <div class="message">
+               <li class="lastchat">
+               <h2><%= friends[i].username %></h2>
+               <p>You:no</p>
+               <p class="time"><span class="entypo-clock"></span> 5 mins ago</p>
+             </div>
           <% } %>
             </tbody>
 
@@ -92,7 +148,7 @@
         </div>
 
         <div class="col-5 full colo3">
-          <nav class="navbar navbar-light bg-faded" style='background-color:#e6e6e6;'>
+          <nav class="navbar fixed-top navbar-light bg-faded" style='background-color:#e6e6e6;'>
             <a class='navbar-brand'>Daryl Christian Rabanos</a>
             <a class="navbar-item" href="#"><span class='fa fa-gear fa-2x'></span></a>
           </nav>
@@ -101,8 +157,7 @@
               <section id="feedback"></section>
             </section>
           </div>
-
-            <input id="user" type="hidden" value="<%= user.username %>"/>
+            <input hidden id="user" type="text" value="<%= user.username %>"/>
             <input id="message" type="text" class="form-control textarea" placeholder="Type Message Here">
             <button id="send_message" class="btn btn-default send" type="submit">Send</button>
 
