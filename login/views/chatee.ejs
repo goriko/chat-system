@@ -1,6 +1,7 @@
 <html lang='en'>
   <head>
     <title>Chatee</title>
+    <meta http-equiv="Content-Type" const="text/html;charset=UTF-8" />
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="vendor/simple-line-icons/css/simple-line-icons.css">
@@ -9,12 +10,39 @@
     <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
     <link href="css/newdesign.css" rel="stylesheet">
     <link href="css/new-age.min.css" rel="stylesheet">
-    <meta http-equiv="Content-Type" const="text/html;charset=UTF-8" />
-    <link href="http://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="css/style.css" >
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
     <style>
+    .simpleModal{
+      display: none;
+      position:fixed;
+        vertical-align: middle;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      margin-top: -15%;
+      background-color: rbga(0,0,0,0.5);
+    }
+
+    .modal-content{
+      background-color: #f4f4f4;
+      margin: 20% auto;
+      padding: 20px;
+      width: 70%;
+      box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2), 0 7px 20px 0 rgba(0,0,0,0.17);
+    }
+
+    .closeBtn{
+      color: #ccc;
+      float: right;
+      font-size: 30px;
+    }
+
+    .closeBtn:hover,.closeBtn:focus{
+      color: #000;
+      text-decoration: none;
+      cursor:pointer;
+    }
+
       .colo1{
         background-color: #47476b;
       }
@@ -25,9 +53,10 @@
         background-color: #f2f2f2;
       }
       .over{
+        margin-top:15%;
     overflow: scroll;
     width: 100%;
-   height: 80%;
+   height: 75%;
       }
       .send{
         position: absolute;
@@ -58,7 +87,7 @@
   font-size: 30;
 }
 .search{
-    width: 130px;
+    width: 100%;
     box-sizing: border-box;
     border: 2px solid #ccc;
     border-radius: 4px;
@@ -69,9 +98,6 @@
     background-repeat: no-repeat;
     padding: 12px 20px 12px 40px;
     transition: width 0.4s ease-in-out;
-}
-.search:focus{
-  width: 100%;
 }
 .message {
 float: left;
@@ -111,7 +137,20 @@ h2:after {
   border-radius: 100%;
   margin-left: 5px;
 }
-
+.tooltips .tooltiptext{
+  visibility: hidden;
+  width: 120px;
+  background-color: #d1d1e0;
+  color: Black;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+}
+.tooltips:hover .tooltiptext{
+  visibility: visible;
+}
     </style>
   </head>
   <body>
@@ -119,7 +158,12 @@ h2:after {
       <div class="row">
         <div class="col-1 full colo1">
           <form action="/logout">
-              <button class="btn">logout</button>
+            <div class='tooltips'>
+              <span class='tooltiptext'>Logout</span>
+              <button class='btn btn-outline-secondary'>
+                <span class='fa fa-sign-out fa-3x'></span>
+              </button>
+            </div>
           </form>
         </div>
         <div class="col-3 full colo2">
@@ -135,21 +179,22 @@ h2:after {
                   <% } %>
             <input type="text" class='search' placeholder="Add friends" name="friend">
           </form>
+          <div class="over">
               <% for(var i=0; i < friends.length; i++) { %>
                 <div class="message">
                <li class="lastchat">
                <h2><%= friends[i].username %></h2>
              </div>
           <% } %>
+        </div>
             </tbody>
 
           </table>
         </div>
 
         <div class="col-5 full colo3">
-          <nav class="navbar fixed-top navbar-light bg-faded" style='background-color:#e6e6e6;'>
+          <nav class="navbar fixed-top navbar-light bg-faded" style='position:absolute; background-color:#e6e6e6;'>
             <a class='navbar-brand'>Daryl Christian Rabanos</a>
-            <a class="navbar-item" href="#"><span class='fa fa-gear fa-2x'></span></a>
           </nav>
           <div class="over">
             <section id="chatroom">
@@ -195,8 +240,6 @@ h2:after {
             			</select>
             			<label>Interests</label>
             			<input type="text" class="form-control" name="interest" value="<%= user.interests %>">
-            			<label>Picture</label>
-            			<input type="file" name="doc">
                 </br>
             		<button type="submit" class="btn btn-warning">Update Info</button>
               </div>
