@@ -127,6 +127,7 @@ h2:after {
           <span class="messages">MESSAGES</span>
           <br>
           <br>
+          <!--Friends section-->
           <form method="POST" action="/add">
             <input type="hidden" name="id" value="<%= user.id %>">
               <% if (message.length > 0) { %>
@@ -138,8 +139,6 @@ h2:after {
                 <div class="message">
                <li class="lastchat">
                <h2><%= friends[i].username %></h2>
-               <p>You:no</p>
-               <p class="time"><span class="entypo-clock"></span> 5 mins ago</p>
              </div>
           <% } %>
             </tbody>
@@ -211,5 +210,24 @@ h2:after {
     </div>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="js/chat.js"></script>
+    <script>
+function myFunction() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("search");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>
   </body>
 </html>
