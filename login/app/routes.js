@@ -109,11 +109,7 @@ app.post('/add',isLoggedIn,function(req,res){
 					// get friends of the user
 					connection.query("SELECT * FROM `friends` join users on users.id = friends.secondId WHERE firstId =  ?",[req.body.id],function(err,results){
 						connection.query("SELECT * FROM `friends` join users on users.id = friends.secondId WHERE firstId =  ?",[req.user.id],function(err,friend){
-						res.render('chatee.ejs',{
-							user:req.user,
-							message:req.flash('errorMessage'),
-							friends:friend
-						});
+						res.redirect('/main');
 						});
 					});
 					});
@@ -124,18 +120,23 @@ app.post('/add',isLoggedIn,function(req,res){
 });
 app.post('/update',function(req, res){
 	connection.query("UPDATE users SET name = ?, interests = ?, address = ?, gender = ? WHERE id = ?", [req.body.name, req.body.interest, req.body.address, req.body.gender, req.body.id], function(err, fresult){
-		console.log(fresult);
+
 		if(err){
 			console.log("wrong");
 		}
-		connection.query("SELECT * FROM users WHERE id = ?", [req.body.id], function(err, fresult){
-			res.render('chatee.ejs', {
-				user : req.user // get the user out of session and pass to template
-			});
+		connection.query("SELECT * FROM users WHERE id = ?", [req.body.id], function(err, userresult){
+			console.log(userresult);
+			connection.query("SELECT * FROM `friends` join users on users.id = friends.secondId WHERE firstId =  ?",[req.user.id],function(err,friend){
+			res.redirect('/main');
+		});
 		});
 	});
 });
-
+app.post('/test',function(req,res){
+	connection.query("SELECT * FROM users", function(err, userresult){
+		res.render('test.ejs',{user:userresult});
+	});
+});
 
 	// =====================================
 	// LOGOUT ==============================
