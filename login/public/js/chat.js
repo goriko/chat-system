@@ -63,3 +63,18 @@ function openModal(){
 function closeModal(){
 	modal.style.display = 'none';
 }
+
+var modal2 = document.getElementById('modal2');
+var modalBtn2 = document.getElementById('modalBtn2');
+var closeBtn2 = document.getElementsByClassName('closeBtn2')[0];
+modalBtn2.addEventListener('click', openModal2);
+closeBtn2.addEventListener('click', closeModal2);
+
+
+function openModal2(){
+	modal2.style.display = 'inline-block';
+}
+
+function closeModal2(){
+	modal2.style.display = 'none';
+}
