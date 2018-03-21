@@ -12,7 +12,7 @@ var passport = require('passport');
 var flash    = require('connect-flash');
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
-var ip = '0.0.0.0';
+var ip = '172.16.30.16';
 // configuration ===============================================================
 // connect to our database
 

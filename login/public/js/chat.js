@@ -1,6 +1,6 @@
 $(function(){
    	//make connection
-	var socket = io.connect()
+	var socket = io.connect('172.16.30.16:3000')
 
 	//buttons and inputs
 	var message = $("#message")
@@ -11,6 +11,8 @@ $(function(){
 	var feedback = $("#feedback")
 	var ye = $("#yee")
   //Emit message
+
+		socket.emit('change_username', {username : username.val()})
 
 
 	send_message.click(function(){

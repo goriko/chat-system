@@ -78,12 +78,15 @@ connection.query("SELECT * FROM `friends` join users on users.id = friends.secon
 app.post('/add',isLoggedIn,function(req,res){
 	//check if friend exists
 	connection.query("Select id from users where username = ?",[req.body.friend],function(err,fresult){
-		console.log(fresult);
 		//////////////////////////////// FOR CHECKING IF USER NAA SUD SA SD /////////////////////////////////////////////
 		if(fresult.length == 0){
-			connection.query("SELECT * FROM users WHERE id = ?",[req.id], function(err, results){  //mangita if naa ang e add na friend sa db
+			//mangita if naa ang e add na friend sa db
+			connection.query("SELECT * FROM users WHERE id = ?",[req.body.id], function(err, results){
 				req.flash('errorMessage', 'No such user');
 						connection.query("SELECT * FROM `friends` join users on users.id = friends.secondId WHERE firstId =  ?",[req.user.id],function(err,friend){
+							if(err){
+								console.log("sdsdasd");
+							}
 							res.render('chatee.ejs',{
 								user:req.user,
 								message:req.flash('errorMessage'),
@@ -92,17 +95,27 @@ app.post('/add',isLoggedIn,function(req,res){
 						});
 					});
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	}else{
-		  connection.query("select * from friends where firstId = ? and secondId = ?",[req.body.id,fresult[0].id],function(err,dupresult){
-				if(dupresult.length > 0){
-					connection.query("SELECT * FROM `friends` join users on users.id = friends.secondId WHERE firstId =  ?",[req.user.id],function(err,friend){
-						req.flash('errorMessage', 'Already friends with user');
-						res.render('chatee.ejs',{
-							user:req.user,
-							message:req.flash('errorMessage'),
-							friends:friend
-						});
-					});
+	}else {
+		connection.query("select * from friends where firstId = ? and secondId = ?",[req.body.id,fresult[0].id],function(err,dupresult){
+		if(fresult[0].id == req.body.id){// if added friend is self
+			req.flash('errorMessage', 'Cant add self');
+			connection.query("SELECT * FROM `friends` join users on users.id = friends.secondId WHERE firstId =  ?",[req.user.id],function(err,friend){
+				res.render('chatee.ejs',{
+					user:req.user,
+					message:req.flash('errorMessage'),
+					friends:friend
+				});
+			});
+			}else if(dupresult.length > 0){
+					//checking if already friends
+			connection.query("SELECT * FROM `friends` join users on users.id = friends.secondId WHERE firstId =  ?",[req.user.id],function(err,friend){
+				req.flash('errorMessage', 'Already friends with user');
+				res.render('chatee.ejs',{
+					user:req.user,
+					message:req.flash('errorMessage'),
+					friends:friend
+				});
+			});
 				}else{
 					//insert friend into db if found
 					connection.query("INSERT INTO friends(firstId,secondId) values (?,?)",[req.body.id,fresult[0].id],function(err,sresult){
@@ -110,12 +123,12 @@ app.post('/add',isLoggedIn,function(req,res){
 					connection.query("SELECT * FROM `friends` join users on users.id = friends.secondId WHERE firstId =  ?",[req.body.id],function(err,results){
 						connection.query("SELECT * FROM `friends` join users on users.id = friends.secondId WHERE firstId =  ?",[req.user.id],function(err,friend){
 						res.redirect('/main');
+								});
+							});
 						});
-					});
-					});
-				}
-			});
-		}
+					}
+				});
+			}
 	});
 });
 app.post('/update',function(req, res){
