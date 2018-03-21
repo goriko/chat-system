@@ -1,7 +1,72 @@
-<style>
+.simpleModal{
+  display: none;
+  position:fixed;
+    vertical-align: middle;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  margin-top: -15%;
+  background-color: rbga(0,0,0,0.5);
+}
 
+.modal-content{
+  background-color: #f4f4f4;
+  margin: 20% auto;
+  padding: 20px;
+  width: 70%;
+  box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2), 0 7px 20px 0 rgba(0,0,0,0.17);
+}
+.closeBtn{
+  color: #ccc;
+  float: right;
+  font-size: 30px;
+}
+
+.closeBtn:hover,.closeBtn:focus{
+  color: #000;
+  text-decoration: none;
+  cursor:pointer;
+}
+
+.simpleModal2{
+    display: none;
+    position:fixed;
+    vertical-align: middle;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  margin-top: -15%;
+  background-color: rbga(0,0,0,0.5);
+}
+.modal-content2{
+  background-color: #f4f4f4;
+  margin: 20% auto;
+  padding: 20px;
+  width: 70%;
+  box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2), 0 7px 20px 0 rgba(0,0,0,0.17);
+}
+.closeBtn2{
+  color: #ccc;
+  float: right;
+  font-size: 30px;
+}
+
+.closeBtn2:hover,.closeBtn2:focus{
+  color: #000;
+  text-decoration: none;
+  cursor:pointer;
+}
+  .colo1{
+    background-color: #47476b;
+  }
+  .colo2{
+    background-color: #666699;
+  }
+  .colo3{
+    background-color: #f2f2f2;
+  }
   .over{
-    margin-top:15%;
+    margin-top:10%;
 overflow: scroll;
 width: 100%;
 height: 75%;
@@ -100,4 +165,7 @@ z-index: 1;
 }
 .tooltips:hover .tooltiptext{
 visibility: visible;
+}
+.info{
+  text-align: center;
 }

@@ -10,200 +10,23 @@
     <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
     <link href="css/newdesign.css" rel="stylesheet">
     <link href="css/new-age.min.css" rel="stylesheet">
+    <link href="css/gorii.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
-    <style>
-    .simpleModal{
-      display: none;
-      position:fixed;
-        vertical-align: middle;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      margin-top: -15%;
-      background-color: rbga(0,0,0,0.5);
-    }
-
-    .modal-content{
-      background-color: #f4f4f4;
-      margin: 20% auto;
-      padding: 20px;
-      width: 70%;
-      box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2), 0 7px 20px 0 rgba(0,0,0,0.17);
-    }
-
-    .closeBtn{
-      color: #ccc;
-      float: right;
-      font-size: 30px;
-    }
-
-    .closeBtn:hover,.closeBtn:focus{
-      color: #000;
-      text-decoration: none;
-      cursor:pointer;
-    }
-    .simpleModal2{
-      display: none;
-      position:fixed;
-        vertical-align: middle;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      margin-top: -15%;
-      background-color: rbga(0,0,0,0.5);
-    }
-
-    .modal-content2{
-      background-color: #f4f4f4;
-      margin: 20% auto;
-      padding: 20px;
-      width: 70%;
-      box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2), 0 7px 20px 0 rgba(0,0,0,0.17);
-    }
-
-    .closeBtn2{
-      color: #ccc;
-      float: right;
-      font-size: 30px;
-    }
-
-    .closeBtn2:hover,.closeBtn:focus{
-      color: #000;
-      text-decoration: none;
-      cursor:pointer;
-    }
-
-      .colo1{
-        background-color: #47476b;
-      }
-      .colo2{
-        background-color: #666699;
-      }
-      .colo3{
-        background-color: #f2f2f2;
-      }
-      .over{
-        margin-top:10%;
-    overflow: scroll;
-    width: 100%;
-    height: 75%;
-      }
-      .send{
-        position: absolute;
-          bottom: 0px;
-
-          right: 0px;
-          width: 10%;
-          height: 50px;
-          z-index: 99;
-          background: #fafafa;
-          border: none;
-          outline: none;
-          padding-left: 55px;
-          padding-right: 55px;
-          color: #666;
-          font-weight: 400;
-      }
-      .full{
-        height: 100%;
-      }
-      #chatroom, #feedback{
-        padding: 0px;
-        margin-top: 0px;
-      }
-      .messages{
-    margin-left: 10%;
-    font-weight: bold;
-    font-size: 30;
-    }
-    .search{
-    width: 100%;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: white;
-    background-image: url('searchicon.png');
-    background-position: 10px 10px;
-    background-repeat: no-repeat;
-    padding: 12px 20px 12px 40px;
-    transition: width 0.4s ease-in-out;
-    }
-    .message {
-    float: left;
-    width: 100%;
-    top: 10px;
-    margin: 10px 0;
-    border-bottom: 1px solid #ccc;
-    }
-    .message p {
-    font-size: 0.8em;
-    width: 90%;
-    margin: 5px 0;
-    }
-    .lastchat {
-    display: block;
-    padding: 8px 16px;
-    text-decoration: none;
-    margin: 10px 0;
-    border-bottom: 1px solid #ccc;
-    }
-    .lastchat:hover {
-      background-color: #555;
-    }
-    ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    }
-    h2 {
-    font-size: 1em;
-    font-weight: 400;
-    }
-    h2:after {
-    content: '';
-    display: inline-block;
-    height: 10px;
-    width: 10px;
-    background: #39caad;
-    border-radius: 100%;
-    margin-left: 5px;
-    }
-    .tooltips .tooltiptext{
-    visibility: hidden;
-    width: 120px;
-    background-color: #d1d1e0;
-    color: Black;
-    text-align: center;
-    padding: 5px 0;
-    border-radius: 6px;
-    position: absolute;
-    z-index: 1;
-    }
-    .tooltips:hover .tooltiptext{
-    visibility: visible;
-    }
-    </style>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="js/chat.js"></script>
   </head>
   <body>
     <div class="container-fluid">
       <div class="row">
         <div class="col-1 full colo1">
-        </br  >
-        <div class='icon tooltips'>
-          <span class='tooltiptext'>Add Friend</span>
-          <button class='btn btn-outline-secondary'>
-            <span class='fa fa-user-plus fa-3x'></span>
-          </button>
-        </div>
-        <button class='btn btn-secondary' id="modalBtn2">Update Profile</button>
-        <div class="simpleModal2" id="modal2">
-          <div class="modal-content2">
-            <span class="closeBtn2 ">&times;</span>
-            <h1>User Information</h1>
+          </br>
+          <div class='icon tooltips'>
+            <span class='tooltiptext'>Add Friend</span>
+            <button class='btn btn-outline-secondary' id="modalBtn2">
+              <span class='fa fa-user-plus fa-3x'></span>
+            </button>
           </div>
-        </div>
-      </br>
+          </br>
           <form action="/logout">
             <div class='tooltips'>
               <span class='tooltiptext'>Logout</span>
@@ -218,42 +41,47 @@
           <span class="messages">MESSAGES</span>
           <br>
           <br>
-          <!--Friends section-->
-          <form method="POST" action="/add">
-            <input type="hidden" name="id" value="<%= user.id %>">
-              <% if (message.length > 0) { %>
-                    <div class="alert alert-danger"><%= message %></div>
-                  <% } %>
-            <input type="text" class='search' placeholder="Add friends" name="friend">
-          </form>
           <div class="over">
-            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+            <input type="text" class="search" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
             <ul id="friends">
               <% for(var i=0; i < friends.length; i++) { %>
-               <li class="lastchat">
-               <h2><%= friends[i].username %></h2>
-          <% } %>
-        </ul>
+              <li class="lastchat">
+              <h2><%= friends[i].username %></h2>
+              <% } %>
+            </ul>
+          </div>
         </div>
-        </div>
-
         <div class="col-5 full colo3">
-          <nav class="navbar fixed-top navbar-light bg-faded" style='position:absolute; background-color:#e6e6e6;'>
-          </nav>
+          <nav class="navbar fixed-top navbar-light bg-faded" style='position:absolute; background-color:#e6e6e6;'></nav>
           <div class="over">
             <section id="chatroom">
               <section id="feedback"></section>
             </section>
           </div>
-            <input hidden id="user" type="text" value="<%= user.username %>"/>
-            <input id="message" type="text" class="form-control textarea" placeholder="Type Message Here">
-            <button id="send_message" class="btn btn-default send" type="submit">Send</button>
-
+          <input hidden id="user" type="text" value="<%= user.username %>"/>
+          <br>
+          <input id="message" type="text" class="form-control textarea" placeholder="Type Message Here">
         </div>
-        <!--Update Modal-->
         <div class="col-3 full colo2">
-
-          <button class='btn btn-secondary' id="modalBtn">Update Profile</button>
+          <br>
+          <br>
+          <span class="messages">USER INFORMATION</span>
+          <ul>
+            <div class="info">
+              <br/>
+              <li>Name : <%=user.name%></li>
+              <li>Address : <%=user.address%></li>
+              <%if(user.gender == 'm'){%>
+              <li>Gender : Male</li>
+              <%}else{%>
+              <li>Gender : Female</li>
+              <%}%>
+              <li>Interests : <%=user.interests%></li>
+              <br>
+              <button class='btn btn-outline-secondary' id="modalBtn">Update</button>
+              </br>
+            </div>
+          </ul>
           <div class="simpleModal" id="modal">
             <div class="modal-content">
               <span class="closeBtn">&times;</span>
@@ -261,42 +89,52 @@
               <form action="/update" method="post">
                 <div class="form-group">
                   <input type="hidden"  name="id", value="<%= user.id %>">
-                 <label>Name</label>
-            		   <input type="text" class="form-control" name="name" value="<%= user.name %>" required>
+                  <label>Name</label>
+            		  <input type="text" class="form-control" name="name" value="<%= user.name %>" required>
             			<label>Address</label>
             			<input type="text" class="form-control" name="address" value="<%= user.address %>" required>
                   <label>Gender</label>
             			<select name="gender" class="form-control" required>
                     <% if(user.gender == 'f'){ %>
-                      <option value="" disabled="disabled">Choose Gender</option>
-                      <option value='m'>Male</option>
-                      <option value='f' selected="selected">Female</option>
+                    <option value="" disabled="disabled">Choose Gender</option>
+                    <option value='m'>Male</option>
+                    <option value='f' selected="selected">Female</option>
                     <% }else if(user.gender == 'm'){ %>
-                      <option value="" disabled="disabled">Choose Gender</option>
-                      <option value='m' selected="selected">Male</option>
-                      <option value='f'>Female</option>
+                    <option value="" disabled="disabled">Choose Gender</option>
+                    <option value='m' selected="selected">Male</option>
+                    <option value='f'>Female</option>
                     <% }else{ %>
-                      <option value="" disabled="disabled" selected="selected">Choose Gender</option>
-                      <option value='m'>Male</option>
-                      <option value='f'>Female</option>
+                    <option value="" disabled="disabled" selected="selected">Choose Gender</option>
+                    <option value='m'>Male</option>
+                    <option value='f'>Female</option>
                     <% } %>
-
             			</select>
             			<label>Interests</label>
             			<input type="text" class="form-control" name="interest" value="<%= user.interests %>" required>
-                </br>
-            		<button type="submit" class="btn btn-warning">Update Info</button>
-              </div>
+                  </br>
+            		    <button type="submit" class="btn btn-warning">Update Info</button>
+                  </div>
               </form>
-
+            </div>
+          </div>
+          <div class="simpleModal2" id="modal2">
+            <div class="modal-content2">
+              <span class="closeBtn2">&times;</span>
+              </br>
+              <h1>Add Friend</h1>
+              <form method="POST" action="/add">
+                <input type="hidden" name="id" value="<%= user.id %>">
+                <% if (message.length > 0) { %>
+                <div class="alert alert-danger"><%= message %></div>
+                <% } %>
+                <input type="text" class='search' placeholder="Type name here" name="friend">
+              </form>
             </div>
           </div>
         </div>
 
       </div>
     </div>
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="js/chat.js"></script>
     <script>
     function myFunction() {
         var input, filter, ul, li, a, i;
