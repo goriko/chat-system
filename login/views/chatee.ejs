@@ -42,6 +42,36 @@
       text-decoration: none;
       cursor:pointer;
     }
+    .simpleModal2{
+      display: none;
+      position:fixed;
+        vertical-align: middle;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      margin-top: -15%;
+      background-color: rbga(0,0,0,0.5);
+    }
+
+    .modal-content2{
+      background-color: #f4f4f4;
+      margin: 20% auto;
+      padding: 20px;
+      width: 70%;
+      box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2), 0 7px 20px 0 rgba(0,0,0,0.17);
+    }
+
+    .closeBtn2{
+      color: #ccc;
+      float: right;
+      font-size: 30px;
+    }
+
+    .closeBtn2:hover,.closeBtn:focus{
+      color: #000;
+      text-decoration: none;
+      cursor:pointer;
+    }
 
       .colo1{
         background-color: #47476b;
@@ -159,6 +189,21 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-1 full colo1">
+        </br  >
+        <div class='icon tooltips'>
+          <span class='tooltiptext'>Add Friend</span>
+          <button class='btn btn-outline-secondary'>
+            <span class='fa fa-user-plus fa-3x'></span>
+          </button>
+        </div>
+        <button class='btn btn-secondary' id="modalBtn2">Update Profile</button>
+        <div class="simpleModal2" id="modal2">
+          <div class="modal-content2">
+            <span class="closeBtn2 ">&times;</span>
+            <h1>User Information</h1>
+          </div>
+        </div>
+      </br>
           <form action="/logout">
             <div class='tooltips'>
               <span class='tooltiptext'>Logout</span>
