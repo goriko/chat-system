@@ -48,33 +48,3 @@ message.on('keydown', function(event){
 		feedback.html("<p><i>" + data.username + " is typing a message..." + "</i></p>")
 	})
 });
-
-var modal = document.getElementById('modal');
-var modalBtn = document.getElementById('modalBtn');
-var closeBtn = document.getElementsByClassName('closeBtn')[0];
-modalBtn.addEventListener('click', openModal);
-closeBtn.addEventListener('click', closeModal);
-
-
-function openModal(){
-	modal.style.display = 'inline-block';
-}
-
-function closeModal(){
-	modal.style.display = 'none';
-}
-
-var modal2 = document.getElementById('modal2');
-var modalBtn2 = document.getElementById('modalBtn2');
-var closeBtn2 = document.getElementsByClassName('closeBtn2')[0];
-modalBtn2.addEventListener('click', openModal2);
-closeBtn2.addEventListener('click', closeModal2);
-
-
-function openModal2(){
-	modal2.style.display = 'inline-block';
-}
-
-function closeModal2(){
-	modal2.style.display = 'none';
-}
