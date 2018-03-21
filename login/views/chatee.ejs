@@ -41,6 +41,9 @@
           <span class="messages">MESSAGES</span>
           <br>
           <br>
+          <% if (message.length > 0) { %>
+          <div class="alert alert-danger"><%= message %></div>
+          <% } %>
           <div class="over">
             <input type="text" class="search" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
             <ul id="friends">
@@ -58,7 +61,7 @@
               <section id="feedback"></section>
             </section>
           </div>
-          <input hidden id="user" type="text" value="<%= user.username %>"/>
+          <input hidden id="user" type="text" value="<%= user.name %>"/>
           <br>
           <input id="message" type="text" class="form-control textarea" placeholder="Type Message Here">
         </div>
@@ -124,9 +127,6 @@
               <h1>Add Friend</h1>
               <form method="POST" action="/add">
                 <input type="hidden" name="id" value="<%= user.id %>">
-                <% if (message.length > 0) { %>
-                <div class="alert alert-danger"><%= message %></div>
-                <% } %>
                 <input type="text" class='search' placeholder="Type name here" name="friend">
               </form>
             </div>
