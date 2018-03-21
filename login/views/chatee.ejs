@@ -11,7 +11,6 @@
     <link href="css/newdesign.css" rel="stylesheet">
     <link href="css/new-age.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
-    <link href="css/gorii.css" rel="stylesheet">
     <style>
     .simpleModal{
       display: none;
@@ -53,7 +52,107 @@
       .colo3{
         background-color: #f2f2f2;
       }
-</style>
+      .over{
+        margin-top:10%;
+    overflow: scroll;
+    width: 100%;
+    height: 75%;
+      }
+      .send{
+        position: absolute;
+          bottom: 0px;
+
+          right: 0px;
+          width: 10%;
+          height: 50px;
+          z-index: 99;
+          background: #fafafa;
+          border: none;
+          outline: none;
+          padding-left: 55px;
+          padding-right: 55px;
+          color: #666;
+          font-weight: 400;
+      }
+      .full{
+        height: 100%;
+      }
+      #chatroom, #feedback{
+        padding: 0px;
+        margin-top: 0px;
+      }
+      .messages{
+    margin-left: 10%;
+    font-weight: bold;
+    font-size: 30;
+    }
+    .search{
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('searchicon.png');
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    transition: width 0.4s ease-in-out;
+    }
+    .message {
+    float: left;
+    width: 100%;
+    top: 10px;
+    margin: 10px 0;
+    border-bottom: 1px solid #ccc;
+    }
+    .message p {
+    font-size: 0.8em;
+    width: 90%;
+    margin: 5px 0;
+    }
+    .lastchat {
+    display: block;
+    padding: 8px 16px;
+    text-decoration: none;
+    margin: 10px 0;
+    border-bottom: 1px solid #ccc;
+    }
+    .lastchat:hover {
+      background-color: #555;
+    }
+    ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    }
+    h2 {
+    font-size: 1em;
+    font-weight: 400;
+    }
+    h2:after {
+    content: '';
+    display: inline-block;
+    height: 10px;
+    width: 10px;
+    background: #39caad;
+    border-radius: 100%;
+    margin-left: 5px;
+    }
+    .tooltips .tooltiptext{
+    visibility: hidden;
+    width: 120px;
+    background-color: #d1d1e0;
+    color: Black;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    }
+    .tooltips:hover .tooltiptext{
+    visibility: visible;
+    }
     </style>
   </head>
   <body>
@@ -86,10 +185,8 @@
             <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
             <ul id="friends">
               <% for(var i=0; i < friends.length; i++) { %>
-                <div class="message">
                <li class="lastchat">
                <h2><%= friends[i].username %></h2>
-             </div>
           <% } %>
         </ul>
         </div>
@@ -120,11 +217,11 @@
                 <div class="form-group">
                   <input type="hidden"  name="id", value="<%= user.id %>">
                  <label>Name</label>
-            		   <input type="text" class="form-control" name="name" value="<%= user.name %>">
+            		   <input type="text" class="form-control" name="name" value="<%= user.name %>" required>
             			<label>Address</label>
-            			<input type="text" class="form-control" name="address" value="<%= user.address %>">
+            			<input type="text" class="form-control" name="address" value="<%= user.address %>" required>
                   <label>Gender</label>
-            			<select name="gender" class="form-control">
+            			<select name="gender" class="form-control" required>
                     <% if(user.gender == 'f'){ %>
                       <option value="" disabled="disabled">Choose Gender</option>
                       <option value='m'>Male</option>
@@ -141,7 +238,7 @@
 
             			</select>
             			<label>Interests</label>
-            			<input type="text" class="form-control" name="interest" value="<%= user.interests %>">
+            			<input type="text" class="form-control" name="interest" value="<%= user.interests %>" required>
                 </br>
             		<button type="submit" class="btn btn-warning">Update Info</button>
               </div>

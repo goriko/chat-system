@@ -1,14 +1,5 @@
 <style>
 
-  .colo1{
-    background-color: #47476b;
-  }
-  .colo2{
-    background-color: #666699;
-  }
-  .colo3{
-    background-color: #f2f2f2;
-  }
   .over{
     margin-top:15%;
 overflow: scroll;
@@ -72,6 +63,8 @@ margin: 5px 0;
 display: block;
 padding: 8px 16px;
 text-decoration: none;
+margin: 10px 0;
+border-bottom: 1px solid #ccc;
 }
 .lastchat:hover {
   background-color: #555;

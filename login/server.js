@@ -12,7 +12,7 @@ var passport = require('passport');
 var flash    = require('connect-flash');
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
-var ip = '192.168.88.163';
+var ip = '0.0.0.0';
 // configuration ===============================================================
 // connect to our database
 
@@ -45,7 +45,7 @@ require('./app/routes.js')(app, passport); // load our routes and pass in our ap
 
 // launch ======================================================================
 
-server.listen(3000)//192.168.1.15
+server.listen(3000,ip)//192.168.1.15
 console.log("connected to server",ip)
 
 io.on('connection',(socket) =>{
